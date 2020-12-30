@@ -1,9 +1,28 @@
-import React from 'react';
-import { GithubContext } from '../context/context';
-import styled from 'styled-components';
+import React from "react";
+import { GithubContext } from "../context/context";
+import styled from "styled-components";
 
 const Followers = () => {
-  return <h2>followers component</h2>;
+  const { followers } = React.useContext(GithubContext);
+
+  return (
+    <Wrapper>
+      <div className="followers">
+        {followers.map((follower, index) => {
+          const { avatar_url: img, html_url, login } = follower;
+          return (
+            <article key={index}>
+              <img src={img} alt={login} />
+              <div>
+                <h4>{login}</h4>
+                <a href={html_url}>{html_url}</a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.article`
@@ -14,7 +33,7 @@ const Wrapper = styled.article`
   position: relative;
 
   &::before {
-    content: ' followers';
+    content: " followers";
     position: absolute;
     top: 0;
     left: 0;
@@ -36,6 +55,20 @@ const Wrapper = styled.article`
     gap: 1.25rem 1rem;
     padding: 1rem 2rem;
   }
+
+  .followers::-webkit-scrollbar {
+    width: 5px;
+    height: 0px;               /* width of the entire scrollbar */
+  }
+  .followers::-webkit-scrollbar-track {
+    background: transparent;        /* color of the tracking area */
+  }
+  .followers::-webkit-scrollbar-thumb {
+    background-color: #a3a3a3;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: none;  /* creates padding around scroll thumb */
+  }
+
   article {
     transition: var(--transition);
     padding: 0.15rem 0.5rem;
@@ -46,7 +79,7 @@ const Wrapper = styled.article`
     column-gap: 1rem;
     img {
       height: 100%;
-      width: 45px;
+      width: auto;
       border-radius: 50%;
       object-fit: cover;
     }
