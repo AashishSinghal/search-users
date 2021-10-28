@@ -1,5 +1,5 @@
 ## Github Search User Project with Github API
-A Portal where u can search user from github and see their profile in a very descriptive manner with the help of data displayed over charts.
+###A Portal where u can search user from github and see their profile in a very descriptive manner with the help of data displayed over charts.
 
 ## Styled Components
 
